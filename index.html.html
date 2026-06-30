@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Informatika Kelas 7 - Dampak Sosial Informatika</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c7d2fe;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('dashboard')">
+                    <div class="p-2 bg-primary-100 text-primary-600 rounded-lg">
+                        <i data-lucide="monitor" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-primary-600 tracking-wider uppercase block">Informatika SMP Kelas VII</span>
+                        <h1 class="text-base font-extrabold text-slate-900 tracking-tight leading-none">Dampak Sosial Informatika</h1>
+                    </div>
+                </div>
+                <!-- Student Identity Indicator -->
+                <div class="hidden sm:flex items-center space-x-2 bg-slate-100 rounded-full py-1 px-3" id="nav-student-profile">
+                    <i data-lucide="user" class="w-4 h-4 text-slate-500"></i>
+                    <span id="nav-student-name" class="text-sm font-medium text-slate-700">Warga Digital</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col justify-between">
+        
+        <!-- SECTION 1: REGISTRATION / INITIAL LANDING -->
+        <section id="section-register" class="page-section max-w-lg mx-auto my-auto w-full bg-white p-8 rounded-2xl shadow-xl border border-slate-100 flex flex-col">
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center text-primary-600 mb-4 animate-bounce">
+                    <i data-lucide="compass" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">Halo, Calon Warga Digital!</h2>
+                <p class="text-slate-500 mt-2 text-sm">Selamat datang di Media Pembelajaran Interaktif. Sebelum kita mulai petualangan belajar, masukkan namamu dulu yuk!</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="student-name-input" class="block text-sm font-semibold text-slate-700 mb-2">Nama Lengkap Kamu</label>
+                    <input type="text" id="student-name-input" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all text-slate-800 placeholder:text-slate-400" placeholder="Contoh: Budi Santoso">
+                </div>
+                <button onclick="registerStudent()" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-6 rounded-xl transition duration-200 shadow-lg shadow-primary-200 flex items-center justify-center space-x-2">
+                    <span>Mulai Belajar</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 2: DASHBOARD (MENU UTAMA) -->
+        <section id="section-dashboard" class="page-section hidden space-y-6">
+            <!-- Greeting Banner -->
+            <div class="bg-gradient-to-r from-primary-600 to-indigo-700 text-white p-6 sm:p-8 rounded-2xl shadow-lg relative overflow-hidden">
+                <div class="relative z-10 max-w-2xl">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold">Halo, <span id="dash-student-name">Warga Digital</span>! 👋</h2>
+                    <p class="mt-2 text-primary-100 text-sm sm:text-base">Mari pelajari bagaimana teknologi informasi mengubah cara hidup kita, cara berkomunikasi, serta bagaimana menjadi warga digital yang bijak dan aman di dunia maya.</p>
+                    <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                        <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">Fase D (Kelas VII)</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">Elemen: Dampak Sosial Informatika (DSI)</span>
+                    </div>
+                </div>
+                <!-- Abstract BG Shapes -->
+                <div class="absolute right-0 bottom-0 top-0 w-1/3 opacity-10 pointer-events-none flex items-center justify-center">
+                    <i data-lucide="network" class="w-48 h-48"></i>
+                </div>
+            </div>
+
+            <!-- Menu Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Materi Belajar -->
+                <div onclick="navigateTo('materi')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="book-open" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900">Materi Interaktif</h3>
+                        <p class="text-slate-500 text-sm mt-2">Pelajari dampak positif & negatif, etika berinternet (netiket), dan cara menghindari kejahatan digital.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center text-emerald-600 font-semibold text-sm">
+                        <span>Buka Materi</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2: Simulasi Etis (Pilihan Ku) -->
+                <div onclick="navigateTo('simulasi')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900">Lab Pilihan Etis</h3>
+                        <p class="text-slate-500 text-sm mt-2">Uji kemampuan pengambilan keputusanmu dalam menghadapi skenario dunia maya yang penuh tantangan.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center text-amber-600 font-semibold text-sm">
+                        <span>Mulai Simulasi</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3: Evaluasi Kuis -->
+                <div onclick="navigateTo('kuis-info')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="award" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900">Kuis Warga Digital</h3>
+                        <p class="text-slate-500 text-sm mt-2">Uji pemahamanmu tentang dampak sosial informatika dan dapatkan sertifikat kelulusan.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center text-primary-600 font-semibold text-sm">
+                        <span>Mulai Kuis</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card 4: Glosarium -->
+                <div onclick="navigateTo('glosarium')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="book-marked" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900">Kamus Warga Digital</h3>
+                        <p class="text-slate-500 text-sm mt-2">Definisi dan arti istilah-istilah penting dunia teknologi (hoaks, cyberbullying, phishing, dll).</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center text-purple-600 font-semibold text-sm">
+                        <span>Lihat Glosarium</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Capaian Pembelajaran & Ringkasan -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-3">
+                    <i data-lucide="info" class="w-5 h-5 text-primary-600"></i>
+                    Tujuan Pembelajaran
+                </h3>
+                <ul class="space-y-2 text-sm text-slate-600 list-disc list-inside">
+                    <li>Memahami dampak positif dan negatif teknologi informasi dalam kehidupan sehari-hari.</li>
+                    <li>Menerapkan etika komunikasi digital yang baik di media sosial (Netiket).</li>
+                    <li>Mengenal bentuk-bentuk kejahatan digital (cybercrime) dan cara menghindarinya.</li>
+                    <li>Menjadi bagian dari komunitas digital yang sehat, aman, dan bertanggung jawab.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 3: MATERI INTERAKTIF -->
+        <section id="section-materi" class="page-section hidden space-y-6">
+            <!-- Header Nav -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <button onclick="navigateTo('dashboard')" class="inline-flex items-center text-slate-600 hover:text-slate-900 font-medium text-sm transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                    Kembali ke Dashboard
+                </button>
+                <!-- Chapter Selector Menu -->
+                <div class="flex overflow-x-auto space-x-1 p-1 bg-slate-100 rounded-xl scrollbar-none" id="materi-tabs">
+                    <button onclick="switchChapter(0)" class="chapter-tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap active transition" data-chapter="0">1. Pengantar</button>
+                    <button onclick="switchChapter(1)" class="chapter-tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-600" data-chapter="1">2. Dampak +/-</button>
+                    <button onclick="switchChapter(2)" class="chapter-tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-600" data-chapter="2">3. Netiket</button>
+                    <button onclick="switchChapter(3)" class="chapter-tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition text-slate-600" data-chapter="3">4. Aman Digital</button>
+                </div>
+            </div>
+
+            <!-- Chapter Content Container -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col md:flex-row">
+                <!-- Sidebar Nav of the current chapter -->
+                <div class="w-full md:w-64 border-r border-slate-200 bg-slate-50 p-4 space-y-2 flex-shrink-0" id="materi-sidebar">
+                    <!-- Dynamic Sidebar Elements (rendered in JS) -->
+                </div>
+
+                <!-- Main Slides View -->
+                <div class="flex-grow p-6 sm:p-8 flex flex-col justify-between min-h-[450px]">
+                    <div id="materi-slide-content" class="space-y-4">
+                        <!-- Dynamic Slide Content (rendered in JS) -->
+                    </div>
+
+                    <!-- Slide Navigation -->
+                    <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <button id="slide-btn-prev" onclick="changeSlide(-1)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-semibold transition flex items-center">
+                            <i data-lucide="chevron-left" class="w-4 h-4 mr-2"></i> Sebelumnya
+                        </button>
+                        <span id="slide-indicator" class="text-xs sm:text-sm text-slate-500 font-medium">Slide 1 dari 5</span>
+                        <button id="slide-btn-next" onclick="changeSlide(1)" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-semibold transition flex items-center">
+                            Berikutnya <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: SIMULASI ETIS (CASE STUDIES) -->
+        <section id="section-simulasi" class="page-section hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <button onclick="navigateTo('dashboard')" class="inline-flex items-center text-slate-600 hover:text-slate-900 font-medium text-sm transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> Kembali ke Dashboard
+                </button>
+                <div class="text-right">
+                    <span class="text-xs text-slate-500 uppercase font-bold tracking-wider">Skor Reputasi Digital</span>
+                    <div class="flex items-center space-x-1 justify-end">
+                        <i data-lucide="shield" class="w-5 h-5 text-emerald-600"></i>
+                        <span id="reputation-score" class="font-extrabold text-emerald-600 text-lg">100</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simulation Box -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden max-w-3xl mx-auto">
+                <div class="p-6 bg-gradient-to-r from-amber-500 to-orange-600 text-white flex items-center space-x-3">
+                    <div class="p-2 bg-white/20 rounded-lg">
+                        <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg">Lab Pilihan Etis Warga Digital</h3>
+                        <p class="text-xs text-amber-100">Jadilah pengambil keputusan yang cerdas di situasi internet dunia nyata!</p>
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-8 space-y-6" id="sim-main-container">
+                    <!-- Dynamic Simulation Content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: KUIS INFO (PENDAHULUAN KUIS) -->
+        <section id="section-kuis-info" class="page-section hidden max-w-xl mx-auto my-auto w-full bg-white p-8 rounded-2xl shadow-xl border border-slate-100 flex flex-col">
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center text-primary-600 mb-4">
+                    <i data-lucide="award" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">Uji Pengetahuan Digital</h2>
+                <p class="text-slate-500 mt-2 text-sm">Evaluasi akhir untuk mendapatkan Gelar Kehormatan <strong class="text-primary-600">"Warga Digital Bijak"</strong> kelas 7.</p>
+            </div>
+
+            <div class="space-y-4 border-t border-b border-slate-100 py-4 my-2 text-sm text-slate-600">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="help-circle" class="w-5 h-5 text-slate-400"></i>
+                    <span>Jumlah pertanyaan: <strong class="text-slate-800">10 Soal Pilihan Ganda</strong></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-slate-400"></i>
+                    <span>Kriteria Kelulusan: <strong class="text-emerald-600">70% Jawaban Benar</strong></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="timer" class="w-5 h-5 text-slate-400"></i>
+                    <span>Kerjakan dengan teliti, tidak ada batasan waktu.</span>
+                </div>
+            </div>
+
+            <div class="mt-4 flex gap-3">
+                <button onclick="navigateTo('dashboard')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-xl transition text-center">
+                    Nanti Saja
+                </button>
+                <button onclick="startQuiz()" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-primary-200 text-center">
+                    Mulai Kuis
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 6: KUIS INTERAKTIF -->
+        <section id="section-kuis" class="page-section hidden max-w-2xl mx-auto space-y-6 w-full">
+            <div class="flex items-center justify-between">
+                <span class="text-xs uppercase font-bold tracking-wider text-slate-500">Kuis Evaluasi</span>
+                <span class="text-sm font-semibold text-primary-600" id="quiz-progress-text">Soal 1 dari 10</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-200 rounded-full h-2">
+                <div id="quiz-progress-bar" class="bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 10%"></div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                <div>
+                    <h3 id="quiz-question" class="text-lg font-bold text-slate-900 leading-relaxed">Pertanyaan yang sedang dimuat...</h3>
+                </div>
+
+                <!-- Options -->
+                <div id="quiz-options-container" class="space-y-3">
+                    <!-- Dynamic Options -->
+                </div>
+
+                <!-- Explanation / Feedback (shown after answer selected) -->
+                <div id="quiz-feedback" class="hidden p-4 rounded-xl text-sm border flex gap-3 items-start animate-fade-in">
+                    <!-- Feedback Content in JS -->
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex justify-end">
+                <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl shadow-md transition items-center space-x-2">
+                    <span>Soal Selanjutnya</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 7: KUIS SELESAI & SERTIFIKAT -->
+        <section id="section-kuis-result" class="page-section hidden max-w-2xl mx-auto space-y-6 w-full text-center">
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="mx-auto w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center animate-bounce">
+                    <i data-lucide="trophy" class="w-10 h-10"></i>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Kuis Selesai! Selamat!</h2>
+                    <p class="text-slate-500 text-sm mt-1">Kamu telah menyelesaikan Kuis Dampak Sosial Informatika.</p>
+                </div>
+
+                <!-- Skor Display -->
+                <div class="py-4 px-6 bg-slate-50 rounded-2xl max-w-xs mx-auto border border-slate-100">
+                    <span class="text-xs uppercase font-bold tracking-wider text-slate-400">Skor Kamu</span>
+                    <h3 id="quiz-final-score" class="text-4xl font-black text-slate-800">80<span class="text-lg text-slate-400 font-medium">/100</span></h3>
+                    <p id="quiz-status-msg" class="text-emerald-600 font-semibold text-sm mt-1">Lulus Kriteria!</p>
+                </div>
+
+                <!-- Sertifikat Mini -->
+                <div id="cert-box" class="hidden border-4 border-double border-primary-200 bg-primary-50/30 p-6 rounded-2xl max-w-lg mx-auto space-y-4 text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i data-lucide="award" class="w-24 h-24 text-primary-600"></i>
+                    </div>
+                    <span class="text-[10px] tracking-widest uppercase font-bold text-primary-600 block">Sertifikat Kelulusan</span>
+                    <h4 class="text-xl font-bold text-slate-800">PENGHARGAAN WARGA DIGITAL BIJAK</h4>
+                    <p class="text-xs text-slate-500">Diberikan dengan hormat kepada:</p>
+                    <span id="cert-student-name" class="text-lg font-bold text-primary-700 underline block my-2">Budi Santoso</span>
+                    <p class="text-[11px] text-slate-500 max-w-sm mx-auto leading-relaxed">Telah berhasil menyelesaikan rangkaian pembelajaran Interaktif & Evaluasi Dampak Sosial Informatika Kelas VII dengan hasil yang sangat memuaskan.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="navigateTo('dashboard')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-xl transition">
+                        Kembali ke Dashboard
+                    </button>
+                    <button onclick="retryQuiz()" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-primary-200">
+                        Coba Lagi Kuis
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: GLOSARIUM / KAMUS ISTILAH -->
+        <section id="section-glosarium" class="page-section hidden space-y-6">
+            <button onclick="navigateTo('dashboard')" class="inline-flex items-center text-slate-600 hover:text-slate-900 font-medium text-sm transition">
+                <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> Kembali ke Dashboard
+            </button>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Kamus Warga Digital</h2>
+                    <p class="text-slate-500 text-sm mt-1">Temukan berbagai istilah kunci dalam materi Dampak Sosial Informatika di sini.</p>
+                </div>
+
+                <!-- Search box -->
+                <div class="relative max-w-md">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </span>
+                    <input type="text" id="glosarium-search" oninput="filterGlosarium()" class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none text-sm" placeholder="Cari istilah, misal: Phishing...">
+                </div>
+
+                <!-- Terms List -->
+                <div id="glosarium-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Dynamic terms rendered in JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+            <p>© 2026 Media Pembelajaran Interaktif Informatika SMP - Dampak Sosial Informatika</p>
+            <p class="mt-1">Dibuat khusus untuk Pembelajaran Siswa Kelas VII sesuai Kurikulum Merdeka.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // === GLOBAL APPLICATION STATE ===
+        const state = {
+            studentName: 'Warga Digital',
+            currentPage: 'register',
+            currentChapter: 0,
+            currentSlide: 0,
+            reputation: 100,
+            currentSimIdx: 0,
+            quizActive: false,
+            quizIndex: 0,
+            quizScore: 0,
+            selectedOption: null,
+            answersRecorded: []
+        };
+
+        // === MATERI DATA STRUCTURE ===
+        const MATERI_DATA = [
+            {
+                title: "1. Pengantar DSI",
+                icon: "globe",
+                slides: [
+                    {
+                        title: "Apa itu Dampak Sosial Informatika?",
+                        desc: "Teknologi informatika (seperti internet, komputer, gawai) telah menjadi bagian yang tidak bisa lepas dari kehidupan kita. Dampak Sosial Informatika mempelajari bagaimana perkembangan teknologi ini mempengaruhi kehidupan sosial, budaya, dan cara kita berinteraksi di dunia nyata maupun dunia digital.",
+                        tip: "Sebagai pelajar kelas VII, penting bagimu untuk memahami cara menggunakan teknologi secara bijak agar mendapat manfaat maksimal dan terhindar dari kerugian.",
+                        visual: `<div class="bg-indigo-50 border border-indigo-100 p-6 rounded-2xl flex flex-col items-center justify-center text-center space-y-3">
+                                    <i data-lucide="network" class="w-16 h-16 text-indigo-600 animate-pulse"></i>
+                                    <h4 class="font-bold text-slate-800">Menghubungkan Dunia</h4>
+                                    <p class="text-xs text-slate-500 max-w-xs">Komputer dan internet mengubah jarak yang jauh menjadi dekat secara instan.</p>
+                                 </div>`
+                    },
+                    {
+                        title: "Menjadi Warga Digital (Digital Citizen)",
+                        desc: "Warga digital adalah orang yang menggunakan teknologi informasi untuk berkomunikasi, berkolaborasi, dan berpartisipasi dalam masyarakat digital. Menjadi warga digital yang baik membutuhkan pemahaman tentang hak, kewajiban, serta etika di dunia maya.",
+                        tip: "Sama seperti di dunia nyata, di dunia digital kita harus saling menghormati, sopan, dan menjaga keamanan diri.",
+                        visual: `<div class="grid grid-cols-2 gap-3 text-center">
+                                    <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+                                        <i data-lucide="check-square" class="w-8 h-8 text-emerald-600 mx-auto mb-1"></i>
+                                        <h5 class="text-xs font-bold">Hak Digital</h5>
+                                        <p class="text-[10px] text-slate-500">Mendapat informasi, berpendapat dengan baik.</p>
+                                    </div>
+                                    <div class="p-3 bg-amber-50 rounded-xl border border-amber-100">
+                                        <i data-lucide="shield-alert" class="w-8 h-8 text-amber-600 mx-auto mb-1"></i>
+                                        <h5 class="text-xs font-bold">Kewajiban Digital</h5>
+                                        <p class="text-[10px] text-slate-500">Menghargai privasi, tidak menyebar fitnah.</p>
+                                    </div>
+                                 </div>`
+                    }
+                ]
+            },
+            {
+                title: "2. Dampak Positif & Negatif",
+                icon: "shuffle",
+                slides: [
+                    {
+                        title: "Dampak Positif Teknologi Informasi",
+                        desc: "Teknologi membawa revolusi besar di berbagai bidang, termasuk pendidikan, kesehatan, dan komunikasi.",
+                        tip: "Contoh nyata adalah kemudahanmu belajar secara mandiri lewat platform video atau situs edukasi interaktif hari ini!",
+                        visual: `<div class="space-y-2">
+                                    <div class="flex items-start space-x-2 text-sm bg-emerald-50 p-3 rounded-xl">
+                                        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                        <div><strong class="text-slate-800">Kemudahan Komunikasi:</strong> Bisa menghubungi teman/keluarga secara tatap muka virtual tanpa batas jarak.</div>
+                                    </div>
+                                    <div class="flex items-start space-x-2 text-sm bg-emerald-50 p-3 rounded-xl">
+                                        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                        <div><strong class="text-slate-800">Akses Informasi Cepat:</strong> Belajar apapun, di mana saja, kapan saja dengan mesin pencari.</div>
+                                    </div>
+                                    <div class="flex items-start space-x-2 text-sm bg-emerald-50 p-3 rounded-xl">
+                                        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                        <div><strong class="text-slate-800">Kolaborasi & Inovasi:</strong> Berbagi proyek sekolah bersama teman di Google Drive atau Canva.</div>
+                                    </div>
+                                 </div>`
+                    },
+                    {
+                        title: "Dampak Negatif Teknologi Informasi",
+                        desc: "Selain kemudahan, internet juga menyimpan bahaya tersembunyi jika kita menggunakannya tanpa kontrol diri dan pemahaman yang benar.",
+                        tip: "Batasi screen-time (waktu menatap layar) maksimal 2 jam setelah aktivitas belajar, untuk menjaga kesehatan fisik dan mental.",
+                        visual: `<div class="space-y-2">
+                                    <div class="flex items-start space-x-2 text-sm bg-rose-50 p-3 rounded-xl">
+                                        <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600 mt-0.5 flex-shrink-0"></i>
+                                        <div><strong class="text-slate-800">Kecanduan Gawai:</strong> Lupa belajar, kurang bergaul secara langsung, dan mengganggu pola tidur.</div>
+                                    </div>
+                                    <div class="flex items-start space-x-2 text-sm bg-rose-50 p-3 rounded-xl">
+                                        <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600 mt-0.5 flex-shrink-0"></i>
+                                        <div><strong class="text-slate-800">Penyebaran Hoaks:</strong> Munculnya berita palsu yang cepat tersebar dan memicu perpecahan.</div>
+                                    </div>
+                                    <div class="flex items-start space-x-2 text-sm bg-rose-50 p-3 rounded-xl">
+                                        <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600 mt-0.5 flex-shrink-0"></i>
+                                        <div><strong class="text-slate-800">Cyberbullying:</strong> Perundungan dunia maya yang menyakiti perasaan orang lain melalui komentar kasar.</div>
+                                    </div>
+                                 </div>`
+                    }
+                ]
+            },
+            {
+                title: "3. Etika Berinternet (Netiket)",
+                icon: "smile",
+                slides: [
+                    {
+                        title: "Apa itu Netiket?",
+                        desc: "Netiket (Netiquette) singkatan dari *Network Etiquette*, yaitu etika bersosialisasi di dunia internet. Sama seperti di dunia nyata yang memiliki adat istiadat, di dunia maya kita juga harus mematuhi aturan moral tidak tertulis.",
+                        tip: "Prinsip Utama: Jangan katakan di internet apa yang tidak berani kamu katakan langsung ke wajah orang tersebut di dunia nyata.",
+                        visual: `<div class="bg-amber-50 border border-amber-100 p-4 rounded-xl flex items-center space-x-3">
+                                    <i data-lucide="message-square-text" class="w-12 h-12 text-amber-600 flex-shrink-0"></i>
+                                    <div class="text-xs text-slate-700">
+                                        <strong>Penting:</strong> Gunakan bahasa yang sopan. Hindari menggunakan HURUF KAPITAL SEMUA karena memberi kesan kamu sedang berteriak / marah.
+                                    </div>
+                                 </div>`
+                    },
+                    {
+                        title: "Prinsip Menyaring Informasi (S-A-R-I-N-G)",
+                        desc: "Sebelum mengunggah, membagikan, atau memberi komentar di internet, saringlah terlebih dahulu konten tersebut agar tidak berakibat buruk.",
+                        tip: "Jangan langsung memencet tombol 'Share' atau 'Kirim' sebelum memikirkannya baik-baik.",
+                        visual: `<div class="grid grid-cols-3 gap-2 text-center text-[10px]">
+                                    <div class="p-2 bg-slate-50 border rounded-lg">
+                                        <span class="font-black text-primary-600 text-sm">S</span>
+                                        <p class="text-slate-500 font-semibold mt-1">Sopan diucapkan?</p>
+                                    </div>
+                                    <div class="p-2 bg-slate-50 border rounded-lg">
+                                        <span class="font-black text-primary-600 text-sm">A</span>
+                                        <p class="text-slate-500 font-semibold mt-1">Aman dibagikan?</p>
+                                    </div>
+                                    <div class="p-2 bg-slate-50 border rounded-lg">
+                                        <span class="font-black text-primary-600 text-sm">R</span>
+                                        <p class="text-slate-500 font-semibold mt-1">Real / Nyata datanya?</p>
+                                    </div>
+                                    <div class="p-2 bg-slate-50 border rounded-lg col-span-1.5">
+                                        <span class="font-black text-primary-600 text-sm">I</span>
+                                        <p class="text-slate-500 font-semibold mt-1">Inspiratif isinya?</p>
+                                    </div>
+                                    <div class="p-2 bg-slate-50 border rounded-lg col-span-1.5">
+                                        <span class="font-black text-primary-600 text-sm">N/G</span>
+                                        <p class="text-slate-500 font-semibold mt-1">Nyaman & Berguna?</p>
+                                    </div>
+                                 </div>`
+                    }
+                ]
+            },
+            {
+                title: "4. Keamanan & Cybercrime",
+                icon: "shield",
+                slides: [
+                    {
+                        title: "Menjaga Privasi & Keamanan Akun",
+                        desc: "Identitas digitalmu sangat berharga. Penjahat siber (hacker) dapat menyalahgunakan akun sosial mediamu, email, atau game online milikmu jika tidak dilindungi dengan benar.",
+                        tip: "Jangan pernah memberikan kode verifikasi (OTP) atau kata sandi kepada orang lain, termasuk orang yang mengaku sebagai admin.",
+                        visual: `<div class="space-y-2 text-xs">
+                                    <div class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg">
+                                        <i data-lucide="key-round" class="w-4 h-4 text-indigo-600"></i>
+                                        <span>Gunakan kombinasi kata sandi kuat (Huruf, Angka, Simbol)</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg">
+                                        <i data-lucide="fingerprint" class="w-4 h-4 text-indigo-600"></i>
+                                        <span>Aktifkan autentikasi dua faktor (2FA) di media sosial</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg">
+                                        <i data-lucide="user-minus" class="w-4 h-4 text-indigo-600"></i>
+                                        <span>Jangan posting foto kartu identitas (KTP/Kartu Pelajar) di internet</span>
+                                    </div>
+                                 </div>`
+                    },
+                    {
+                        title: "Mengenal Kejahatan Siber (Cybercrime)",
+                        desc: "Ada beberapa jenis kejahatan digital populer yang sering mengintai kita di internet, salah satunya adalah Phishing dan Scam.",
+                        tip: "Jika menerima link dari nomor tak dikenal yang meminta data pribadi, segera abaikan atau laporkan.",
+                        visual: `<div class="grid grid-cols-2 gap-3">
+                                    <div class="p-3 bg-red-50 border border-red-100 rounded-xl">
+                                        <h5 class="text-xs font-bold text-red-700">Phishing 🎣</h5>
+                                        <p class="text-[10px] text-slate-500 mt-1">Umpan pancingan untuk mencuri sandi dengan membuat web tiruan/palsu.</p>
+                                    </div>
+                                    <div class="p-3 bg-red-50 border border-red-100 rounded-xl">
+                                        <h5 class="text-xs font-bold text-red-700">Malware 🐛</h5>
+                                        <p class="text-[10px] text-slate-500 mt-1">Virus jahat yang menyusup ke gawai ketika salah memencet tombol unduh.</p>
+                                    </div>
+                                 </div>`
+                    }
+                ]
+            }
+        ];
+
+        // === SIMULATION (STUDI KASUS) DATA ===
+        const SIMULASI_DATA = [
+            {
+                caseTitle: "Skenario 1: Pesan Hadiah Gratis 🎁",
+                caseDesc: "Kamu mendapat pesan WhatsApp dari nomor asing yang mengaku dari pihak perusahaan minimarket terkenal. Pesan itu berisi ucapan selamat karena kamu memenangkan undian Rp 5 juta, lengkap dengan link mencurigakan untuk diklik agar uang dapat dikirim.",
+                options: [
+                    {
+                        text: "Memencet link tersebut karena penasaran dan ingin mengecek kebenarannya.",
+                        feedback: "Keputusan Berbahaya! Link tersebut adalah Phishing. Sandi/data penting di hp-mu bisa tercuri. Reputasimu menurun.",
+                        reputationImpact: -30,
+                        success: false
+                    },
+                    {
+                        text: "Mengabaikan pesan, memblokir nomor tersebut, dan melaporkannya sebagai spam.",
+                        feedback: "Keputusan Cerdas! Kamu menyadari ciri-ciri penipuan digital (scam/phishing) dan langsung melindungi dirimu. Reputasi meningkat!",
+                        reputationImpact: 10,
+                        success: true
+                    },
+                    {
+                        text: "Menyebarkan informasi tersebut ke grup WhatsApp kelas agar teman-teman lainnya ikut beruntung.",
+                        feedback: "Fatal! Kamu berisiko mencelakakan teman-teman sekelasmu dengan menyebar pesan phishing. Reputasi menurun drastis.",
+                        reputationImpact: -40,
+                        success: false
+                    }
+                ]
+            },
+            {
+                caseTitle: "Skenario 2: Foto Teman Jadi Meme 📸",
+                caseDesc: "Di sebuah grup obrolan kelas, seorang teman mengunggah foto konyol teman sekelas lainnya saat sedang tidur mangap di kelas, lalu menjadikannya bahan candaan/meme yang mengundang gelak tawa tidak pantas.",
+                options: [
+                    {
+                        text: "Ikut tertawa dan menambahi komentar ejekan agar suasana semakin ramai.",
+                        feedback: "Sangat Buruk! Kamu telah berpartisipasi dalam tindakan Cyberbullying (perundungan dunia maya) yang merusak mental temanmu.",
+                        reputationImpact: -30,
+                        success: false
+                    },
+                    {
+                        text: "Menegur pengunggah secara sopan di grup agar menghapus fotonya demi menghargai privasi teman.",
+                        feedback: "Hebat! Kamu membela kebenaran dan menerapkan etika netiket yang tinggi untuk menghentikan bullying.",
+                        reputationImpact: 20,
+                        success: true
+                    },
+                    {
+                        text: "Diam saja dan tidak mau ikut campur dalam masalah tersebut.",
+                        feedback: "Kurang Bijak! Berdiam diri saat melihat tindakan tidak benar di depan mata membuat tindakan penindasan di internet terus tumbuh.",
+                        reputationImpact: -5,
+                        success: false
+                    }
+                ]
+            },
+            {
+                caseTitle: "Skenario 3: Kabar Heboh Gempa Bumi 🚨",
+                caseDesc: "Di media sosial, muncul postingan heboh bahwa akan terjadi gempa bumi dahsyat susulan malam ini di daerahmu. Postingan itu tidak mencantumkan sumber resmi dari BMKG, melainkan hanya kata 'pesan berantai dari grup sebelah'.",
+                options: [
+                    {
+                        text: "Langsung menyebarkan (share) postingan ke status media sosial dan grup keluarga agar semua orang tahu.",
+                        feedback: "Buruk! Menyebarkan berita yang belum jelas kebenarannya berpotensi menimbulkan kepanikan massal (Hoaks).",
+                        reputationImpact: -25,
+                        success: false
+                    },
+                    {
+                        text: "Melakukan verifikasi ke situs resmi BMKG atau akun sosial media bercentang biru sebelum bertindak.",
+                        feedback: "Luar Biasa! Ini adalah sifat kritis penangkal hoaks yang wajib dimiliki setiap warga digital beretika.",
+                        reputationImpact: 20,
+                        success: true
+                    }
+                ]
+            }
+        ];
+
+        // === QUIZ DATA ===
+        const KUIS_DATA = [
+            {
+                q: "Bagaimanakah arti kata 'Warga Digital' yang tepat?",
+                options: [
+                    { t: "Orang yang bekerja di industri perakitan komputer.", isCorrect: false },
+                    { t: "Setiap individu yang memanfaatkan teknologi informasi untuk berkomunikasi, berpartisipasi, dan berkarya.", isCorrect: true },
+                    { t: "Penduduk suatu wilayah yang bebas menggunakan komputer secara gratis.", isCorrect: false },
+                    { t: "Orang yang suka membeli peralatan elektronik canggih.", isCorrect: false }
+                ],
+                expl: "Warga digital mencakup siapa saja yang aktif memanfaatkan internet dan teknologi untuk berinteraksi secara sehat dan positif."
+            },
+            {
+                q: "Berikut ini yang merupakan dampak positif penggunaan informatika di bidang pendidikan adalah...",
+                options: [
+                    { t: "Bisa berbelanja barang dari luar negeri kapan saja.", isCorrect: false },
+                    { t: "Dapat menonton video film favorit seharian penuh.", isCorrect: false },
+                    { t: "Dapat mengakses e-book dan jurnal pembelajaran secara bebas dan cepat.", isCorrect: true },
+                    { t: "Dapat bermain game online multiplayer bersama teman-teman sekolah tanpa batasan waktu.", isCorrect: false }
+                ],
+                expl: "Akses bahan ajar digital (e-book, jurnal, dll) mempermudah kegiatan belajar mandiri siswa di mana saja."
+            },
+            {
+                q: "Apa yang dimaksud dengan 'Netiket' (Network Etiquette)?",
+                options: [
+                    { t: "Aturan cara merakit kabel jaringan internet di sekolah.", isCorrect: false },
+                    { t: "Hukum pidana resmi bagi pelaku kriminal di internet.", isCorrect: false },
+                    { t: "Etika dan sopan santun dalam berkomunikasi secara digital di dunia internet.", isCorrect: true },
+                    { t: "Layanan pendaftaran akun sosial media berbayar.", isCorrect: false }
+                ],
+                expl: "Netiket adalah sopan santun komunikasi digital untuk menjaga perdamaian dan rasa saling menghargai di internet."
+            },
+            {
+                q: "Penggunaan huruf kapital (besar semua) pada saat mengirim pesan teks obrolan dinilai kurang baik karena memberi kesan...",
+                options: [
+                    { t: "Pengirim sedang berbisik-bisik.", isCorrect: false },
+                    { t: "Pengirim sedang berteriak, marah, atau membentak.", isCorrect: true },
+                    { t: "Pengirim memiliki keyboard komputer yang rusak.", isCorrect: false },
+                    { t: "Pesan tersebut berisi informasi sangat rahasia.", isCorrect: false }
+                ],
+                expl: "Dalam tata bahasa dunia maya, menulis pesan dengan huruf kapital diartikan sebagai nada bicara yang keras atau marah."
+            },
+            {
+                q: "Sebelum membagikan kabar/informasi di internet, kita harus 'menyaringnya'. Manakah yang bukan bagian dari prinsip menyaring informasi tersebut?",
+                options: [
+                    { t: "Memastikan berita tersebut nyata dan dari sumber resmi.", isCorrect: false },
+                    { t: "Memikirkan apakah kabar tersebut menginspirasi atau berguna jika dibagikan.", isCorrect: false },
+                    { t: "Langsung membagikannya karena judulnya sangat heboh dan mengundang klik banyak orang.", isCorrect: true },
+                    { t: "Memastikan bahasa yang digunakan sopan dan aman bagi pembaca.", isCorrect: false }
+                ],
+                expl: "Kabar dengan judul heboh / memancing sering kali merupakan 'Clickbait' atau hoaks. Harus dicek kebenarannya dulu sebelum dibagi."
+            },
+            {
+                q: "Bagaimana cara membuat kata sandi (password) akun digital yang aman dari ancaman peretasan?",
+                options: [
+                    { t: "Menggunakan tanggal lahir pribadi agar tidak mudah lupa.", isCorrect: false },
+                    { t: "Menggunakan kombinasi variasi huruf besar, huruf kecil, angka, dan karakter simbol khusus.", isCorrect: true },
+                    { t: "Menggunakan nama hewan peliharaan kesayangan.", isCorrect: false },
+                    { t: "Membuat password yang sangat pendek, misal: '1234'.", isCorrect: false }
+                ],
+                expl: "Kombinasi acak huruf, angka, dan karakter spesial menyulitkan program peretas menebak sandi akunmu."
+            },
+            {
+                q: "Metode penipuan siber untuk memancing korban agar memberikan data sensitif (seperti password) melalui website tiruan disebut...",
+                options: [
+                    { t: "Cyberbullying", isCorrect: false },
+                    { t: "Phishing", isCorrect: true },
+                    { t: "Malware", isCorrect: false },
+                    { t: "E-Commerce", isCorrect: false }
+                ],
+                expl: "Phishing (plesetan dari fishing/memancing) bertujuan mengelabui korban untuk mendapatkan informasi sensitif."
+            },
+            {
+                q: "Mengolok-olok atau menghina teman di kolom komentar media sosial secara terus menerus termasuk tindakan kejahatan bernama...",
+                options: [
+                    { t: "Cyberbullying", isCorrect: true },
+                    { t: "Phishing", isCorrect: false },
+                    { t: "Copyright", isCorrect: false },
+                    { t: "Browsing", isCorrect: false }
+                ],
+                expl: "Cyberbullying adalah perundungan di media digital yang dapat membahayakan mental korban secara berkepanjangan."
+            },
+            {
+                q: "Jika Anda menemukan link misterius dikirim oleh orang asing melalui email, tindakan terbaik yang harus dilakukan adalah...",
+                options: [
+                    { t: "Langsung membukanya karena penasaran.", isCorrect: false },
+                    { t: "Mengabaikan email, memblokir pengirim, dan menghapusnya.", isCorrect: true },
+                    { t: "Meneruskan (forward) email tersebut ke kerabat terdekat.", isCorrect: false },
+                    { t: "Mengisi kolom pendaftaran di dalamnya dengan data palsu.", isCorrect: false }
+                ],
+                expl: "Mengabaikan dan memblokir pengirim asing menghindarkan gawai dari infeksi virus (malware) atau jebakan phishing."
+            },
+            {
+                q: "Penyebaran hoaks di Indonesia diatur secara hukum pidana formal dalam Undang-Undang...",
+                options: [
+                    { t: "UU Perlindungan Anak", isCorrect: false },
+                    { t: "UU Informasi dan Transaksi Elektronik (UU ITE)", isCorrect: true },
+                    { t: "UU Hak Cipta", isCorrect: false },
+                    { t: "Undang-Undang Dasar 1945", isCorrect: false }
+                ],
+                expl: "UU ITE mengatur segala bentuk transaksi, informasi, dan hukuman pidana kejahatan di dunia elektronik/internet Indonesia."
+            }
+        ];
+
+        // === GLOSARIUM / KAMUS ISTILAH ===
+        const GLOSARIUM_DATA = [
+            { term: "Cybercrime", def: "Tindak kejahatan yang dilakukan secara virtual menggunakan jaringan komputer atau internet." },
+            { term: "Cyberbullying", def: "Perundungan, perundungan siber, atau tindakan menindas orang lain secara mental melalui media digital." },
+            { term: "Phishing", def: "Upaya penipuan memancing korban untuk memberikan data rahasia melalui website tiruan yang menyerupai aslinya." },
+            { term: "Malware", def: "Perangkat lunak jahat (seperti virus/ransomware) yang didesain untuk merusak, mencuri data, atau menyusup sistem komputer." },
+            { term: "Netiket", def: "Etika jaringan atau sopan santun yang disepakati bersama dalam bersosialisasi di dunia internet." },
+            { term: "Hoaks", def: "Berita bohong, palsu, atau informasi tidak nyata yang dibuat sengaja untuk menipu pembaca." },
+            { term: "Digital Citizen", def: "Warga digital; seseorang yang aktif dan bijak menggunakan teknologi informasi secara bertanggung jawab." },
+            { term: "Spam", def: "Pesan massal tidak diundang atau sampah digital yang dikirim terus-menerus ke kotak masuk surel/obrolan." },
+            { term: "Two-Factor Authentication (2FA)", def: "Fitur keamanan berlapis yang mewajibkan pengguna memasukkan dua jenis bukti verifikasi saat masuk akun." },
+            { term: "Digital Footprint", def: "Jejak digital; riwayat aktivitas atau data yang ditinggalkan pengguna saat menjelajahi internet (sukar dihapus)." }
+        ];
+
+        // === APP FLOW AND NAVIGATION ===
+        function registerStudent() {
+            const nameInput = document.getElementById('student-name-input').value.trim();
+            if (nameInput) {
+                state.studentName = nameInput;
+                document.getElementById('nav-student-name').textContent = nameInput;
+                document.getElementById('dash-student-name').textContent = nameInput;
+                document.getElementById('cert-student-name').textContent = nameInput;
+                navigateTo('dashboard');
+            } else {
+                alert("Masukkan namamu dulu ya, agar belajarnya lebih asyik!");
+            }
+        }
+
+        function navigateTo(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+            
+            // Show requested page
+            const targetPage = document.getElementById(`section-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                state.currentPage = pageId;
+            }
+
+            // Top Header Profile visibility
+            const profileIndicator = document.getElementById('nav-student-profile');
+            if (pageId === 'register') {
+                profileIndicator.classList.add('hidden');
+            } else {
+                profileIndicator.classList.remove('hidden');
+            }
+
+            // Page Specific Initializers
+            if (pageId === 'materi') {
+                initMateri();
+            } else if (pageId === 'simulasi') {
+                initSimulasi();
+            } else if (pageId === 'glosarium') {
+                initGlosarium();
+            }
+
+            // Auto-scroll to top of page on change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Re-render lucide icons
+            setTimeout(() => { lucide.createIcons(); }, 50);
+        }
+
+        // === MATERI SECTION LOGIC ===
+        function initMateri() {
+            // Reset materi state if just entered
+            state.currentChapter = 0;
+            state.currentSlide = 0;
+            renderMateriChapter();
+        }
+
+        function switchChapter(chapIdx) {
+            state.currentChapter = chapIdx;
+            state.currentSlide = 0;
+            renderMateriChapter();
+        }
+
+        function renderMateriChapter() {
+            const chap = MATERI_DATA[state.currentChapter];
+            
+            // Update Chapter tab buttons styling
+            document.querySelectorAll('.chapter-tab-btn').forEach(btn => {
+                const idx = parseInt(btn.getAttribute('data-chapter'));
+                if (idx === state.currentChapter) {
+                    btn.className = "chapter-tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap bg-primary-600 text-white transition";
+                } else {
+                    btn.className = "chapter-tab-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
+                }
+            });
+
+            // Render Chapter Sidebar Menu (Slides indicator list)
+            const sidebar = document.getElementById('materi-sidebar');
+            sidebar.innerHTML = `
+                <div class="px-2 py-1.5 mb-2">
+                    <span class="text-xs font-bold text-slate-400 tracking-wider uppercase block">Daftar Subtopik</span>
+                </div>
+            `;
+            
+            chap.slides.forEach((sl, sIdx) => {
+                const activeClass = sIdx === state.currentSlide 
+                    ? 'bg-primary-50 text-primary-700 font-bold border-l-4 border-primary-600' 
+                    : 'text-slate-600 hover:bg-slate-100 border-l-4 border-transparent';
+                
+                sidebar.innerHTML += `
+                    <button onclick="goToSlide(${sIdx})" class="w-full text-left px-3 py-2 text-xs sm:text-sm rounded-lg transition ${activeClass}">
+                        ${sl.title}
+                    </button>
+                `;
+            });
+
+            renderSlide();
+        }
+
+        function goToSlide(slideIdx) {
+            state.currentSlide = slideIdx;
+            renderMateriChapter();
+        }
+
+        function renderSlide() {
+            const chap = MATERI_DATA[state.currentChapter];
+            const slide = chap.slides[state.currentSlide];
+            
+            const contentContainer = document.getElementById('materi-slide-content');
+            contentContainer.innerHTML = `
+                <span class="text-xs font-bold text-primary-500 uppercase tracking-widest">${chap.title}</span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">${slide.title}</h2>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed mt-4">${slide.desc}</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 items-center">
+                    <!-- Visual Panel -->
+                    <div>
+                        ${slide.visual}
+                    </div>
+                    <!-- Tips/Edu Box -->
+                    <div class="bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100/40 flex items-start space-x-3 text-xs sm:text-sm text-indigo-900">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <strong>Tips Warga Digital:</strong>
+                            <p class="text-indigo-800/80 mt-1">${slide.tip}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Adjust navigation buttons
+            const isFirstChapter = state.currentChapter === 0;
+            const isFirstSlide = state.currentSlide === 0;
+            const isLastChapter = state.currentChapter === MATERI_DATA.length - 1;
+            const isLastSlide = state.currentSlide === chap.slides.length - 1;
+
+            const btnPrev = document.getElementById('slide-btn-prev');
+            const btnNext = document.getElementById('slide-btn-next');
+            const slideIndicator = document.getElementById('slide-indicator');
+
+            // Total slides calculation
+            let totalSlides = 0;
+            let currentOverallIndex = 0;
+            MATERI_DATA.forEach((ch, chI) => {
+                ch.slides.forEach((sl, slI) => {
+                    totalSlides++;
+                    if (chI < state.currentChapter || (chI === state.currentChapter && slI <= state.currentSlide)) {
+                        currentOverallIndex++;
+                    }
+                });
+            });
+
+            slideIndicator.textContent = `Halaman ${currentOverallIndex} dari ${totalSlides}`;
+
+            // Handle Previous state
+            if (isFirstChapter && isFirstSlide) {
+                btnPrev.disabled = true;
+                btnPrev.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                btnPrev.disabled = false;
+                btnPrev.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            // Handle Next state
+            if (isLastChapter && isLastSlide) {
+                btnNext.innerHTML = `Selesai Belajar <i data-lucide="check" class="w-4 h-4 ml-2"></i>`;
+            } else {
+                btnNext.innerHTML = `Berikutnya <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>`;
+            }
+
+            lucide.createIcons();
+        }
+
+        function changeSlide(direction) {
+            const chap = MATERI_DATA[state.currentChapter];
+            
+            if (direction === 1) { // Next
+                if (state.currentSlide < chap.slides.length - 1) {
+                    state.currentSlide++;
+                    renderMateriChapter();
+                } else if (state.currentChapter < MATERI_DATA.length - 1) {
+                    state.currentChapter++;
+                    state.currentSlide = 0;
+                    renderMateriChapter();
+                } else {
+                    // All materials read!
+                    navigateTo('dashboard');
+                    alert("Hebat! Kamu telah menyelesaikan semua materi belajar. Sekarang ayo uji pengambilan keputusanmu di Lab Pilihan Etis.");
+                }
+            } else { // Previous
+                if (state.currentSlide > 0) {
+                    state.currentSlide--;
+                    renderMateriChapter();
+                } else if (state.currentChapter > 0) {
+                    state.currentChapter--;
+                    state.currentSlide = MATERI_DATA[state.currentChapter].slides.length - 1;
+                    renderMateriChapter();
+                }
+            }
+        }
+
+        // === SIMULATION (CASE STUDIES) LOGIC ===
+        function initSimulasi() {
+            state.reputation = 100;
+            state.currentSimIdx = 0;
+            document.getElementById('reputation-score').textContent = state.reputation;
+            renderSimulasiStep();
+        }
+
+        function renderSimulasiStep() {
+            const container = document.getElementById('sim-main-container');
+            
+            if (state.currentSimIdx >= SIMULASI_DATA.length) {
+                // Simulation Completed!
+                let badge = "Warga Digital Teladan";
+                let badgeColor = "text-emerald-600 bg-emerald-50";
+                if (state.reputation < 60) {
+                    badge = "Warga Digital Kurang Hati-Hati";
+                    badgeColor = "text-rose-600 bg-rose-50";
+                } else if (state.reputation < 85) {
+                    badge = "Warga Digital Cukup Baik";
+                    badgeColor = "text-amber-600 bg-amber-50";
+                }
+
+                container.innerHTML = `
+                    <div class="text-center py-6 space-y-4">
+                        <div class="mx-auto w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center">
+                            <i data-lucide="shield-check" class="w-10 h-10"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-slate-900">Petualangan Lab Selesai!</h4>
+                        <p class="text-sm text-slate-500 max-w-md mx-auto">Reputasi akhirmu berhasil disimpan. Kamu adalah seorang:</p>
+                        
+                        <div class="inline-block py-2 px-6 rounded-full font-bold text-lg ${badgeColor} shadow-inner border border-current">
+                            ${badge}
+                        </div>
+
+                        <div class="text-2xl font-extrabold text-slate-800 pt-2">
+                            Skor Reputasi: ${state.reputation} / 100
+                        </div>
+
+                        <div class="pt-6 flex justify-center gap-3">
+                            <button onclick="initSimulasi()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">
+                                Ulangi Simulasi
+                            </button>
+                            <button onclick="navigateTo('dashboard')" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl text-sm transition">
+                                Kembali ke Menu
+                            </button>
+                        </div>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            const sim = SIMULASI_DATA[state.currentSimIdx];
+            
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Kasus ${state.currentSimIdx + 1} dari ${SIMULASI_DATA.length}</span>
+                    <h4 class="text-xl font-bold text-slate-800">${sim.caseTitle}</h4>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        ${sim.caseDesc}
+                    </p>
+                    
+                    <div class="pt-2">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Apa yang akan kamu lakukan?</span>
+                        <div class="space-y-3" id="sim-options-list">
+                            ${sim.options.map((opt, oIdx) => `
+                                <button onclick="selectSimOption(${oIdx})" class="w-full text-left p-4 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/20 text-slate-700 text-sm font-semibold transition flex items-start gap-3">
+                                    <span class="w-6 h-6 bg-slate-100 text-slate-600 font-bold flex items-center justify-center rounded-lg text-xs flex-shrink-0">${String.fromCharCode(65 + oIdx)}</span>
+                                    <span>${opt.text}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        function selectSimOption(optIdx) {
+            const sim = SIMULASI_DATA[state.currentSimIdx];
+            const chosen = sim.options[optIdx];
+            
+            // Apply impact to reputation
+            state.reputation = Math.max(0, Math.min(100, state.reputation + chosen.reputationImpact));
+            document.getElementById('reputation-score').textContent = state.reputation;
+
+            // Generate Result Screen for this step
+            const container = document.getElementById('sim-main-container');
+            const alertColor = chosen.success ? 'bg-emerald-50 text-emerald-900 border-emerald-200' : 'bg-red-50 text-red-900 border-red-200';
+            const alertIcon = chosen.success ? 'check-circle' : 'alert-circle';
+            const impactSign = chosen.reputationImpact >= 0 ? `+${chosen.reputationImpact}` : `${chosen.reputationImpact}`;
+            const impactColor = chosen.reputationImpact >= 0 ? 'text-emerald-600' : 'text-rose-600';
+
+            container.innerHTML = `
+                <div class="space-y-6 text-center py-4">
+                    <div class="max-w-md mx-auto p-5 rounded-2xl border ${alertColor} space-y-3">
+                        <i data-lucide="${alertIcon}" class="w-12 h-12 mx-auto ${chosen.success ? 'text-emerald-600' : 'text-red-500'}"></i>
+                        <h4 class="font-bold text-lg">${chosen.success ? 'Keputusan Bijaksana!' : 'Pilihan Kurang Tepat!'}</h4>
+                        <p class="text-xs sm:text-sm leading-relaxed">${chosen.feedback}</p>
+                    </div>
+
+                    <div class="text-sm font-semibold">
+                        Dampak Reputasi Digital: <span class="font-extrabold ${impactColor} text-lg">${impactSign} poin</span>
+                    </div>
+
+                    <button onclick="nextSimStep()" class="px-6 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl text-sm transition inline-flex items-center space-x-2">
+                        <span>Lanjutkan Kasus</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        function nextSimStep() {
+            state.currentSimIdx++;
+            renderSimulasiStep();
+        }
+
+        // === KUIS SECTION LOGIC ===
+        function startQuiz() {
+            state.quizActive = true;
+            state.quizIndex = 0;
+            state.quizScore = 0;
+            state.selectedOption = null;
+            state.answersRecorded = [];
+            
+            navigateTo('kuis');
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            const currentQ = KUIS_DATA[state.quizIndex];
+            state.selectedOption = null;
+
+            // Update Progress UI
+            document.getElementById('quiz-progress-text').textContent = `Soal ${state.quizIndex + 1} dari ${KUIS_DATA.length}`;
+            const progressPct = ((state.quizIndex + 1) / KUIS_DATA.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progressPct}%`;
+
+            // Elements references
+            const questionEl = document.getElementById('quiz-question');
+            const optionsContainer = document.getElementById('quiz-options-container');
+            const feedbackEl = document.getElementById('quiz-feedback');
+            const nextBtn = document.getElementById('quiz-next-btn');
+
+            // Reset UI States
+            nextBtn.classList.add('hidden');
+            feedbackEl.classList.add('hidden');
+
+            questionEl.textContent = `${state.quizIndex + 1}. ${currentQ.q}`;
+            
+            optionsContainer.innerHTML = '';
+            currentQ.options.forEach((opt, oIdx) => {
+                const btn = document.createElement('button');
+                btn.className = "quiz-option-btn w-full text-left p-4 rounded-xl border border-slate-200 hover:border-primary-500 hover:bg-primary-50/10 transition font-medium text-sm flex items-start gap-3 text-slate-700";
+                btn.innerHTML = `
+                    <span class="option-lbl w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-xs flex-shrink-0 text-slate-500">${String.fromCharCode(65 + oIdx)}</span>
+                    <span class="option-text">${opt.t}</span>
+                `;
+                btn.onclick = () => selectQuizOption(oIdx, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectQuizOption(optIdx, selectedBtn) {
+            if (state.selectedOption !== null) return; // Disable clicking other options once chosen
+
+            state.selectedOption = optIdx;
+            const currentQ = KUIS_DATA[state.quizIndex];
+            const isCorrect = currentQ.options[optIdx].isCorrect;
+
+            // Log score
+            if (isCorrect) {
+                state.quizScore++;
+            }
+
+            // Highlighting options UI
+            const optionBtns = document.querySelectorAll('.quiz-option-btn');
+            optionBtns.forEach((btn, idx) => {
+                const isThisCorrect = currentQ.options[idx].isCorrect;
+                const label = btn.querySelector('.option-lbl');
+                
+                btn.disabled = true;
+                
+                if (isThisCorrect) {
+                    btn.classList.replace('border-slate-200', 'border-emerald-500');
+                    btn.classList.add('bg-emerald-50/30', 'text-emerald-900');
+                    label.classList.replace('bg-slate-100', 'bg-emerald-500');
+                    label.classList.add('text-white');
+                } else if (idx === optIdx) {
+                    btn.classList.replace('border-slate-200', 'border-rose-500');
+                    btn.classList.add('bg-rose-50/30', 'text-rose-900');
+                    label.classList.replace('bg-slate-100', 'bg-rose-500');
+                    label.classList.add('text-white');
+                }
+            });
+
+            // Show explanation feedback
+            const feedbackEl = document.getElementById('quiz-feedback');
+            feedbackEl.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackEl.className = "p-4 rounded-xl text-sm border flex gap-3 items-start bg-emerald-50 border-emerald-100 text-emerald-900 animate-fade-in";
+                feedbackEl.innerHTML = `
+                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="font-bold">Benar Sekali!</strong>
+                        <p class="mt-1">${currentQ.expl}</p>
+                    </div>
+                `;
+            } else {
+                feedbackEl.className = "p-4 rounded-xl text-sm border flex gap-3 items-start bg-rose-50 border-rose-100 text-rose-900 animate-fade-in";
+                feedbackEl.innerHTML = `
+                    <i data-lucide="alert-circle" class="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="font-bold">Jawaban Kurang Tepat!</strong>
+                        <p class="mt-1">${currentQ.expl}</p>
+                    </div>
+                `;
+            }
+
+            // Show 'Next' Button
+            const nextBtn = document.getElementById('quiz-next-btn');
+            nextBtn.classList.remove('hidden');
+            nextBtn.classList.add('inline-flex');
+
+            if (state.quizIndex === KUIS_DATA.length - 1) {
+                nextBtn.querySelector('span').textContent = 'Selesai & Lihat Hasil';
+            } else {
+                nextBtn.querySelector('span').textContent = 'Soal Selanjutnya';
+            }
+
+            lucide.createIcons();
+        }
+
+        function nextQuestion() {
+            if (state.quizIndex < KUIS_DATA.length - 1) {
+                state.quizIndex++;
+                loadQuizQuestion();
+            } else {
+                // End of quiz
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            navigateTo('kuis-result');
+            const finalPct = Math.round((state.quizScore / KUIS_DATA.length) * 100);
+            
+            const scoreDisplay = document.getElementById('quiz-final-score');
+            scoreDisplay.innerHTML = `${finalPct}<span class="text-lg text-slate-400 font-medium">/100</span>`;
+            
+            const statusMsg = document.getElementById('quiz-status-msg');
+            const certBox = document.getElementById('cert-box');
+
+            if (finalPct >= 70) {
+                statusMsg.textContent = "Kamu Lulus & Mendapat Sertifikat!";
+                statusMsg.className = "text-emerald-600 font-bold text-sm mt-1";
+                certBox.classList.remove('hidden');
+            } else {
+                statusMsg.textContent = "Skormu belum mencapai kriteria kelulusan (70%). Belajar lagi yuk!";
+                statusMsg.className = "text-rose-600 font-bold text-sm mt-1";
+                certBox.classList.add('hidden');
+            }
+        }
+
+        function retryQuiz() {
+            startQuiz();
+        }
+
+        // === GLOSARIUM SECTION LOGIC ===
+        function initGlosarium() {
+            renderGlosariumList(GLOSARIUM_DATA);
+        }
+
+        function renderGlosariumList(list) {
+            const container = document.getElementById('glosarium-list');
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-8 text-slate-400">
+                        <i data-lucide="frown" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                        <p class="text-sm">Tidak menemukan istilah tersebut.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            list.forEach(item => {
+                container.innerHTML += `
+                    <div class="p-4 bg-slate-50/70 border border-slate-100 rounded-xl space-y-1.5 hover:shadow-sm transition-all">
+                        <h4 class="font-extrabold text-primary-700 text-base flex items-center gap-1.5">
+                            <i data-lucide="hash" class="w-4 h-4 text-primary-400"></i>
+                            ${item.term}
+                        </h4>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${item.def}</p>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function filterGlosarium() {
+            const query = document.getElementById('glosarium-search').value.toLowerCase().trim();
+            const filtered = GLOSARIUM_DATA.filter(item => 
+                item.term.toLowerCase().includes(query) || 
+                item.def.toLowerCase().includes(query)
+            );
+            renderGlosariumList(filtered);
+        }
+
+        // === PAGE LOAD INITIALIZATION ===
+        window.onload = function() {
+            navigateTo('register');
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
